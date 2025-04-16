@@ -1,0 +1,45 @@
+﻿@model ProductListViewModel
+
+<h2>Product List</h2>
+<p><a href="/Product/Create">Create New Product</a></p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ProductId</th>
+            <th>ProductName</th>
+            <th>CategoryId</th>
+            <th>CategoryName</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Products)
+        {
+            <tr>
+                <td>@item.ProductId</td>
+                <td>@item.ProductName</td>
+                <td>@item.CategoryId</td>
+                <td>@item.Category?.CategoryName</td>
+                <td>
+                    <a href="/Product/Edit/@item.ProductId">Edit</a> |
+                    <a href="/Product/Delete/@item.ProductId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    @for (int i = 1; i <= Model.TotalPages; i++)
+    {
+        if (i == Model.CurrentPage)
+        {
+            <strong>@i</strong>
+        }
+        else
+        {
+            <a href="/Product/Index?page=@i">@i</a>
+        }
+    }
+</div>
